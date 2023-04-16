@@ -1,0 +1,140 @@
+Student.txt
+Sno, Rollno, Name , ...... State
+1,   R001,   ABC,  ...... Rajasthan
+2,   R002,   PQR,  ...... Maharashtra
+3,   R003,   XYZ,  ...... West Bengal
+4,   R004,   YUT,  ...... Himachal Pradesh
+.......
+10000 records
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+Trainee
+TrnNo   Name  Gender Marks  Age
+T001    ABC   Male   75.25  21
+T002    XYZ   Female 65.25  18
+T003    TYU   Male   75.67  19
+T004    YTU   Male   null   21
+
+Name of relation: Trainee
+Name of Attributes/Fields: TrnNo, Name, Gender, Marks and Age
+Tuples/records: T001... 21, T002... 18, T003... 19 and T004... 21
+Degree of Relation: 5
+Cardinality of Relation: 4
+Domain for Gender: {Male, Female}
+Domain for Marks: 0.00 to 100.00
+Domain for Age: 18 to 27
+
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+Consider the following
+empid empname email       mobileno   salary
+E001  ABC     abc@ms.com  8585XXXX85 2000
+E002  PQR     pqr@ms.com  9696XXXX96 3000
+E003  XYZ     xyz@ms.com  7486XXXX75 1500
+E004  TRE     tre@ms.com  7425XXXX74 1600
+E005  YTR     ytr@ms.com  7425XXXX74 1860
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+category
+cid   cname
+C001  Furniture
+C002  Electronix
+C003  Clothing
+
+product
+pid   pname   cat_id    price
+P001  Chair   C001      455.25
+P002  Light   C002      100.00
+P003  Shirt   C003      299.00
+P004  Table   C001      599.00
+P005  Lamp    C002      399.00
+P006  Doormat null      199.00
+P007  Pen     C004       99.00 [Error]
+
+primary table: category   primary key: cid
+secondary table: product   primary key: pid   foreign key: cid
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+TINY INT: byte
+SMALL INT: short
+MEDIUM INT: 3 bytes (no java equivalent)
+INT: int
+-2147483648 to 2147483647
+BIG INT: long
+
+DECIMAL: float/double
+FLOAT: float
+DOUBLE: float
+
+FLOAT & DOUBLE can be specified without size
+For DECIMAL size has to be specified
+
+0.00 - 100.00
+Total digits: 5 (this is precision)
+Decimal places: 2 (this is scale)
+Decimal(5, 2)
+
+ph value of a substrance
+0.0 - 14.0
+Total digits/precision: 3
+Decimal places/Scale: 1
+Decimal(3, 1)
+
+CHAR: PAN
+- good for fixed length character sequence
+- max size: 255 characters
+- fast
+- For every character 1 byte of memory is required
+e.g. Say we have a column with data type char(7) with following values
+Nayan, Jayant, Faizan, Jai
+Nayan _ _ (Remaining 2 characters memory will be padded with space)
+Jayant _ (Remaining 1 character memory will be padded with space)
+Faizan _ (Remaining 1 character memory will be padded with space)
+Jai _ _ _ _ (Remaining 4 character memory will be padded with space)
+
+VARCHAR: NAME
+- good for variable length character sequence
+- max size: 65535 characters
+- slow
+
+e.g. Say we have a column with data type varchar(10) with following values
+Nayan, Jayant, Faizan, Jai
+Nayan (5 characters memory for content + some space to store total number of characters in the value)
+Jayant (6 characters memory for content + some space to store total number of characters in the value)
+Faizan (6 characters memory for content + some space to store total number of characters in the value)
+Jai (3 characters memory for content + some space to store total number of characters in the value)
+
+TEXT: use if number of characters is more than 65535 characters
+
+Date & Time Type
+Date: YYYY-MM-DD
+Datetime: YYYY-MM-DD HH:MM:SS
+
+
+Simple Primary Key
+CBSE Exam 2022-23 class X
+rollno is primary key
+Single column rollNo is primary key this time
+
+Composite Primary Key
+CBSE Exam 2017-18 to 2022-23 class X
+rollno is not a primary key
+rollNo + sessionNumber --> primary key
+
+
+
+ CREATE TABLE `st` (
+  `rollNo` int NOT NULL,
+  `name` varchar(20) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `x_per` double(5,2) DEFAULT (33.0),
+  `state` varchar(25) DEFAULT NULL,
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB
+
+UNIQUE KEY constraint-name (column-name)
+
+By default the column name and the ocnstraint name are same
+
+ALTER TABLE st DROP INDEX email; will drop unique constraint but not column
+
+ALTER TABLE st DROP COLUMN email; will drop column + constaint

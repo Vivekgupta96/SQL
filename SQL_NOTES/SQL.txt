@@ -1,0 +1,543 @@
+Write Query to add new column dob with data type date
+
+ALTER TABLE student
+ADD dob date;
+
+
+Write Query to change the size of email_id to 50 from 20
+
+ALTER TABLE student
+MODIFY email VARCHAR(50);
+
+Write Query to change the name of column from dob to birth_date
+
+ALTER TABLE student
+CHANGE dob birth_date date;
+
+
+Write Query to change the table name from student to st
+1.	ALTER TABLE student
+	RENAME TO st;
+
+2. rename table st to std;
+
+write Qquery to change the name of column
+
+Alter table table_name rename column columnName_old to newcolunm_name;
+
+****************************************************************************
+
+
+Write Query to drop the column birth_date from table st
+ALTER TABLE st
+DROP birth_date;
+
+*********************************************
+Write Query to drop primary key
+ALTER TABLE st
+DROP PRIMARY KEY;
+
+Write Query to make the rollNo column as primary key
+ALTER TABLE st
+ADD PRIMARY KEY(rollNo);
+*********************************************
+Write Query to drop NOT NULL from column name
+ALTER TABLE st
+MODIFY name VARCHAR(20) NULL;
+
+Write Query to drop default from column x_per
+ALTER TABLE st
+ALTER x_per DROP DEFAULT;
+
+Write query to apply default value 33.00 for column x_per
+ALTER TABLE st
+ALTER x_per SET DEFAULT 33.0;
+
+******************************************************
+Write Query to apply unique constraint on column email
+ALTER TABLE st
+MODIFY email VARCHAR(50) UNIQUE;
+
+*******************************************************
+
+inserting into the tableINSERT INTO st
+insert into st
+VALUES
+(8, 'ijk', 'ijk@ms.com', 77.36, 'Haryana'),
+(9, 'jkl' , 'jkl@ms.com', 85.55, 'Rajasthan'),
+(10, 'AED' , NULL, '56.00', 'Karnataka');
+
+
+Query to increase the x_per by 2% for all scholars whose x_per is more than 70.0
+UPDATE st SET x_per = x_per + 2 WHERE x_per > 70.0;
+
+Query to set percentage to 66.00, state to kerala for student efg
+UPDATE st SET x_per = 66.00, state = 'kerela' WHERE name = 'efg';
+
+
+Query to delete students whose percentage is more than or equal to 85.00
+DELETE FROM st WHERE x_per >= 85.00;
+
+
+Write query to view all records of the table such that only rollNo, name and x_per column should be in result.
+SELECT rollNo, name, x_per FROM st;
+
+
+Write query to display all distict value for column x_per
+SELECT DISTINCT(x_per) FROM st;
+
+
+
+****************************************************************************************************************************
+Write query to view all records of the table such that rollNo should be displayed with heading Roll Number, name should be displayed with heading Student Name and x_per should be displayed with heading Inter Exam Percentage.
+
+
+SELECT rollNo as "Roll Number", name as "Student Name", x_per as "Inter Exam Percentage" FROM st;
+
+OR
+
+SELECT rollNo "Roll Number", name "Student Name", x_per "Inter Exam Percentage" FROM st;
+or 
+
+SELECT rollNo as RN, name as SName, x_per as 10_Per FROM st;
+
+********************************************************************************************************************************
+
+
+whose name starts with letter 'a'
+
+SELECT * FROM st
+WHERE name LIKE 'a%';
+
+ankita
+
+
+whose name contains letter 'a'
+SELECT * FROM st
+WHERE name LIKE '%a%';
+
+
+whose name ends with letter 'a'
+SELECT * FROM st
+WHERE name LIKE '%a';
+
+whose name has second last letter 'a'
+SELECT * FROM st
+WHERE name LIKE '%a_';
+
+
+whose name has second letter 'a'
+SELECT * FROM st
+WHERE name LIKE '_a%';
+
+whose name is of three letters and the middle letter is 'a'
+SELECT * FROM st
+WHERE name LIKE '_a_';
+
+
+***********************************************************************************************************************
+
+SELECT CEIL(1.1), CEIL(1.5), CEIL(1.9);
+SELECT FLOOR(1.9), FLOOR(1.5), FLOOR(1.1);
+
+SELECT greatest(10, 20 ,30, 40, 50), least(10, 20 ,30, 40, 50);
+
+****************************************************************
++++++++++++++++++++++aggregate functions+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+    select avg(x_per) from st;
+    select min(x_per) from st;
+    select max(x_per) from st;
+	
+	SELECT SUM(x_per) "TOTAL_PERCENTAGE" FROM st;
+	 SELECT COUNT(email) TOTAL_EMAIL, COUNT(x_per) TOTAL_PER, COUNT(*) TOTAL_RECORDS FROM st;
+   
+    SELECT abs(-10), abs(10);
+  
+    SELECT mod(45, 10), mod(-43,10);
+    SELECT round(1.49), round(1.50), round(1.51);
+	SELECT round(1.44,1), round(1.45,1), round(1.46,1);
+	SELECT truncate(1.49, 0), truncate(1.50, 0), truncate(1.51, 0);
+	
+	SELECT UPPER('Masai'), LOWER('Masai'), length('Masai');
+	
+	SELECT replace('MESEI', 'E', 'A'), concat('Masai', ' School'), substr('Masai', 2, 3);
+	
+	 SELECT SYSDATE(), SLEEP(2), SYSDATE();
+	 
+	  SELECT NOW(), SLEEP(2), NOW();
+	  Write query to see which is present working database
+
+ SELECT DATABASE();
+	
+ ********************************************************************************************
+	DELETE FROM t1 WHERE c2 LIKE '%B%';
+	INSERT INTO t1 (c2) VALUES ('CDE');
+	SELECT * FROM t1;
+
+
+- DELETE is used to delete record selectively
+- DELETE do not reset the value of auto increment column
+
+***********************************************************************************************
+TRUNCATE TABLE t1;
+ TRUNCATE is used to delete all records of the table in one shot
+- TRUNCATE resets the value of auto increment column
+
+DROP TABLE t1;
+
+- DROP is used to delete tyable structure so all the records will be deleted automatically
+
+
+************************************************************************************************
+
+Write query to add 10 to x_per and display with heading new_x_per (No need to use update query because this is one time result)
+
+
+SELECT (x_per + 10) AS new_x_per FROM st;
+
+Write query to find all students whose percentage is is more than 74.69
+SELECT * FROM st WHERE x_per > 74.69;
+
+
+Write query to find rollNo as RN, name as Sname, x_per as 10_per whose x_per is less than 66.00
+
+SELECT rollNo as RN, name as Sname, x_per as 10_per FROM st WHERE x_per < 66.00;
+
+Write query to find all students whose state is Karnataka
+SELECT * FROM st WHERE state = 'Karnataka';
+
+Write query to find all students whose x_per is not euals to 33.00
+SELECT * FROM st WHERE x_per != 33.00;
+
+Write a query to find all students whose x_per is more than or equals to 33.00 and less than or equals to 74.69;
+SELECT * FROM st WHERE x_per BETWEEN 33.00 AND 74.69;
+
+Write a query to find all students whose x_per is neither more than or equals to 33.00 and nor less than or equals to 74.69;
+
+SELECT * FROM st WHERE x_per NOT BETWEEN 33.00 AND 74.69;
+
+Write a query to find all students whose percentage is more than or equal to 60.00 and the student must be from state Karnataka
+SELECT * FROM st WHERE x_per >= 60.00 AND state = 'Karnataka';
+
+
+Write a query to find all students whose percentage is more than or equal to 60.00 or the student must be from state Karnataka
+SELECT * FROM st WHERE x_per >= 60.00 OR state = 'Karnataka';
+
+Write a query to find all students whose percentage is more than 60.00 and less than 77.65 or whose state is Karnataka
+
+SELECT * FROM st WHERE (x_per > 60.00 AND x_per < 77.65) OR state = 'Karnataka';
+
+******************************************************************************************
+write a query to find all scholars whose state is either Karnataka, Punjab or Rajasthan
+
+
+SELECT * FROM st WHERE state = 'Karnataka' || state = 'Punjab' || state = 'Rajasthan';
+
+Incorrect Way to write query
+SELECT * FROM st WHERE state = 'Karnataka' || 'Punjab' || 'Rajasthan'; #INCORRECT
+
+Alternative Query
+SELECT * FROM st WHERE state IN('Karnataka', 'Punjab', 'Rajasthan');
+
+
+Write a query to find all scholars whose state is neither Karnataka nor Punjab nor Rajasthan
+
+SELECT * FROM st WHERE state NOT IN('Karnataka', 'Punjab', 'Rajasthan');
+
+******************************************************************************************
+
+Write a query to find all scholars whose email is null
+
+SELECT * FROM st WHERE email = NULL; #INCORRECT
+SELECT * FROM st WHERE email IS NULL;
+
+Write a query to find all scholars whose name has second letter 'B'
+SELECT * FROM st WHERE name LIKE '_B%';
+
+Write a query to show the records of students in the ascending order of x_per
+SELECT * FROM st ORDER BY x_per;
+is same as
+SELECT * FROM st ORDER BY x_per ASC;
+
+
+Write a query to show the records of students in the ascending order of the x_per if tie in x_per they should be displayed in the descending order of the rollNo
+SELECT * FROM st ORDER BY x_per, rollNo DESC;
+
+Write a query to show name, email and x_per of students in the descending order of name
+SELECT name, email, x_per FROM st ORDER BY name DESC;
+
+Query to show name, email and x_per of students in the descending order of x_per. You need to display from 3rd record and display 4 records.
+
+SELECT name, email, x_per
+FROM st
+ORDER BY x_per DESC
+LIMIT 2, 4; # start = 2, total_records = 4.
+
+
+**************************************************************************************
+Write a query to rollno, name and email of all students but if a student do not have an email then 'No Email' should be displayed instead of null
+
+mysql> SELECT rollno, name, IF(email IS NULL, 'No Email', email) FROM st;
+
+
+**************************************************************************************
+Write a query to name, x_per and remark for student such that remark should be according to following criteria
+WHEN x_per < 33.00 - 'FAIL'
+WHEN x_per < 60.00 - 'PASS, IMPROVEMENT REQUIRED'
+WHEN x_per < 75.00 - 'PASS, GOOD JOB'
+ELSE 'GENIUS'
+mysql> SELECT name, x_per,
+    -> (CASE
+    -> WHEN x_per < 33.00 THEN 'FAIL'
+    -> WHEN x_per < 60.00 THEN 'PASS, IMPROVEMENT REQUIRED'
+    -> WHEN x_per < 75.00 THEN 'PASS, GOOD JOB'
+    -> ELSE 'GENIUS'
+    -> END) REMARK
+    -> FROM st;
+	
+***************************************************************************************
+
+
+subquery started
+
+mysql> CREATE TABLE emp(
+	Eid VARCHAR(4) PRIMARY KEY,
+	Ename VARCHAR(10) NOT NULL,
+	Dept VARCHAR(10) NOT NULL,
+	Salary INT,
+	Designation VARCHAR(10) NOT NULL
+);
+
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> INSERT INTO emp
+VALUES
+('E001', 'ABC', 'SALES', 25000, 'SM'),
+('E002', 'PQR', 'SALES', 35000, 'SM'),
+('E003', 'RTY', 'HRM', 58000, 'SSM'),
+('E004', 'RED', 'HRM', 38000, 'HR'),
+('E005', 'YUT', 'BDO', 25000, 'BM'),
+('E006', 'RFT', 'BDO', 48000, 'BM');
+
+
+Write query to find sum of salaries paid department wise (using WHERE clause)
+
+SELECT Dept, SUM(Salary) "TOTAL_SAL" FROM employee WHERE Dept = 'SALES';
+
+
+***********group by always use with agreigate function**************
+
+
+Write query to find sum of salaries paid department wise (using GROUP BY clause)
+
+SELECT Dept, SUM(Salary) "TOTAL_SAL" FROM employee GROUP BY Dept;
+
+
+Write query to find counting of employees for combination of department and designation.
+
+SELECT dept, designation, COUNT(*) "TOTAL_EMP" FROM employee GROUP BY dept, designation;
+
+
+***************************************************************************************
+Write a query to find department name and total salary paid department wise such that you need to count only those employees whose salary is more than 25000; display the records in the descending order of total salary
+
+
+SELECT Dept, SUM(salary) "TOTAL_SAL"
+FROM employee
+WHERE salary > 25000
+GROUP BY Dept
+ORDER BY TOTAL_SAL DESC;
+
+1. FROM employee
+Eid   Ename  Dept     Salary  Designation
+E001	ABC	   SALES	  25000   SM
+E002	PQR	   SALES	  35000   SM
+E003	RTY	   HRM	    58000   SSM
+E004	RED	   HRM	    38000   HR
+E005	YUT	   BDO	    25000   BM
+E006	RFT	   BDO	    48000   BM	
+
+2. WHERE salary > 25000
+Eid   Ename  Dept     Salary  Designation
+E002	PQR	   SALES	  35000   SM
+E003	RTY	   HRM	    58000   SSM
+E004	RED	   HRM	    38000   HR
+E006	RFT	   BDO	    48000   BM	
+
+3. GROUP BY Dept
+Eid   Ename  Dept     Salary  Designation
+Group-1
+E002	PQR	   SALES	  35000   SM
+
+Group-2
+E003	RTY	   HRM	    58000   SSM
+E004	RED	   HRM	    38000   HR
+
+Group-3
+E006	RFT	   BDO	    48000   BM
+
+4. SELECT Dept, SUM(salary) "TOTAL_SAL"
+Dept   TOTAL_SAL
+SALES  35000
+HRM    96000
+BDO    48000
+
+5. ORDER BY TOTAL_SAL DESC;
+Dept   TOTAL_SAL
+HRM    96000
+BDO    48000
+SALES  35000
+
+
+****************************************************************************************************
+Using the having close;
+Write a query to find department, average salary of the employees department wise such that include only those employees whose designation has letter 'M' anywhere; consider only those groups whose total salary is more than or equal to 60000. Display the records in the descending order of the average salaries.
+
+
+SELECT dept, AVG(salary) "AVG_SALARY" FROM employee WHERE designation LIKE '%M%' GROUP BY dept HAVING SUM(salary) >= 60000 ORDER BY AVG_SALARY DESC;
+
++-------+------------+
+| dept  | AVG_SALARY |
++-------+------------+
+| BDO   | 36500.0000 |
+| SALES | 30000.0000 |
++-------+------------+
+
+1. FROM employee
+Eid   Ename  Dept     Salary  Designation
+E001	ABC	   SALES	  25000   SM
+E002	PQR	   SALES	  35000   SM
+E003	RTY	   HRM	    58000   SSM
+E004	RED	   HRM	    38000   HR
+E005	YUT	   BDO	    25000   BM
+E006	RFT	   BDO	    48000   BM
+
+2. WHERE designation LIKE '%M%'
+Eid   Ename  Dept     Salary  Designation
+E001	ABC	   SALES	  25000   SM
+E002	PQR	   SALES	  35000   SM
+E003	RTY	   HRM	    58000   SSM
+E005	YUT	   BDO	    25000   BM
+E006	RFT	   BDO	    48000   BM
+
+3. GROUP BY dept
+Group-1
+E001	ABC	   SALES	  25000   SM
+E002	PQR	   SALES	  35000   SM
+
+Group-2
+E003	RTY	   HRM	    58000   SSM
+
+Group-3
+E005	YUT	   BDO	    25000   BM
+E006	RFT	   BDO	    48000   BM
+
+4. HAVING SUM(salary) >= 60000
+Group-1
+E001	ABC	   SALES	  25000   SM
+E002	PQR	   SALES	  35000   SM
+	
+Group-3
+E005	YUT	   BDO	    25000   BM
+E006	RFT	   BDO	    48000   BM
+
+5. SELECT dept, AVG(salary) "AVG_SALARY"
+dept    AVG_SALARY
+SALES   30000
+BDO     36500
+
+6. ORDER BY AVG_SALARY DESC;
+dept    AVG_SALARY
+BDO     36500
+SALES   30000
+
+
+***********************************************************************************************************
+
+subquerry stateted
+
+Write a query to find record of students whose percentage is maximum among all scholars
+
+Solution
+#using subquery with the WHERE clause
+SELECT *
+FROM st
+WHERE x_per = (
+	SELECT MAX(x_per)
+	FROM st
+);
+
+???????????????????????????????????
+Write query to display name, x_per, average percentage, difference of student's percentage to average percentage for all students
+
+SELECT name, x_per, (SELECT AVG(x_per) FROM st) "AVG_PER", x_per - (SELECT AVG(x_per) FROM st) as "difference" FROM st;
+
+Write query to display name, x_per, average percentage, difference of student's percentage to average percentage for all students
+
+SELECT name, x_per, (SELECT AVG(x_per) FROM st) "AVG_PER", x_per - (SELECT AVG(x_per) FROM st) as "difference" FROM st;
+
+************
+Write a query demonstatre subquery in FROM clause
+SELECT max(x_per)
+FROM (SELECT name, x_per, email FROM st WHERE email IS NOT NULL)
+
+
+***********
+
+Write a query to find state and average x_per for all state such that include only those states whose average x_per is more than that of Karnataka
+
+SELECT state, AVG(x_per)
+FROM st
+GROUP BY state
+HAVING AVG(x_per) > (
+	SELECT AVG(x_per) FROM st WHERE state = 'Karnataka'
+);
+
+****************
+
+Add a record to the 'st' table with following data
+rollNo: 11, name: PQR, email: pqr@gmail.com, state: Himachal Pradesh, x_per: maximum x_per of all students
+
+INSERT INTO st
+VALUES
+(11, 'PQR', 'pqr@gmail.com', (SELECT max(xp) FROM st S), 'Himachal Pradesh');
+
+
+ not in uses ********
+Write a query to find record of all scholars whose x_per is not equal to the x_per from the scholars of Odisha
+SELECT * FROM st
+WHERE x_per NOT IN(
+	SELECT x_per FROM st WHERE state = 'Odisha'
+);
+
+ select * from st where
+    -> xp!=(select xp from st where
+    -> state="odisha");
+	
+	
+any uses************
+	Write a query to find record of all scholars whose x_per is less than the x_per of any scholar of Karnataka
+SELECT * FROM st
+WHERE x_per < ANY(
+	SELECT x_per FROM st WHERE state = 'Karnataka'
+);
+
+
+**********all uses
+Write a query to find record of all scholars whose x_per is less than the x_per of all scholar of Karnataka
+
+
+SELECT * FROM st
+WHERE x_per < ALL(
+	SELECT x_per FROM st WHERE state = 'Karnataka'
+);
+
+
+
+
+
+
+
+
+A primary key in SQL is a unique identifier for a row in a table. It is a column or a combination of columns that uniquely identifies each row in a table. The primary key ensures that each row in a table can be uniquely identified and prevents duplicate or inconsistent data.

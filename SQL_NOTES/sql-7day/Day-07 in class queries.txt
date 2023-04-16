@@ -1,0 +1,554 @@
+An Example
+CREATE TABLE category (
+	cat_id int(6) PRIMARY KEY,
+	cat_name varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO category
+VALUES
+(1, 'Electronics'),
+(2, 'Stationary'),
+(3, 'Furniture'),
+(4, 'Food Items'),
+(5, 'House-keeping Goods');
+
+CREATE TABLE product(
+	pro_id INT(8) PRIMARY KEY,
+	pro_name VARCHAR(20) NOT NULL,
+	MRP double(7,2),
+	MFG_DATE date NOT NULL,
+	category_id INT(6),
+	CONSTRAINT product_category_fk FOREIGN KEY (category_id) REFERENCES category(cat_id)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO product
+VALUES
+(1, 'Parker Pen', 349, '2022-06-16', 2),
+(2, 'Student Chair', 1499, '2021-12-31', 3),
+(3, 'Dark Chocolate', 399, '2022-04-30', 4),
+(4, 'Microwave Oven', 10500, '2022-05-15', 1),
+(5, 'AC', 34500, '2022-05-01', 1),
+(6, 'Footware', 599, '2022-05-01', NULL);
+
+SELECT * FROM category
+cat_id  cat_name
+1       Electronics
+2       Stationary
+3       Furniture
+4       Food Items
+5       House-keeping Goods
+
+SELECT * FROM Product;
+pro_id  pro_name       MRP       MFG_DATE    category_id
+1       Parker Pen     349.00	   2022-06-16	 2
+2       Student Chair	 1499.00	 2021-12-31	 3
+3       Dark Chocolate 399.00	   2022-04-30	 4
+4       Microwave Oven 10500.00	 2022-05-15	 1
+5       AC	        	 34500.00  2022-05-01	 1
+6       Footware	     599.00	   2022-05-01	 NULL
+
+Write query to perform cross join on category and product table.
+SELECT * FROM Category CROSS JOIN Product; #Left table: category Right table: product
+SELECT * FROM Category, Product; #Left table: category Right table: product
+
+SELECT * FROM category, product;	#Left table: category Right table: product
+cat_id  cat_name             pro_id  pro_name       MRP       MFG_DATE    category_id
+1	      Electronics	         1       Parker Pen     349.00	  2022-06-16	2
+2       Stationary		       1       Parker Pen     349.00	  2022-06-16	2
+3       Furniture		         1       Parker Pen     349.00	  2022-06-16	2
+4       Food Items		       1       Parker Pen     349.00	  2022-06-16	2
+5       House-keeping Goods	 1       Parker Pen	    349.00	  2022-06-16	2
+1       Electronics          2       Student Chair	1499.00	  2021-12-31	3
+2       Stationary           2       Student Chair	1499.00	  2021-12-31	3
+3       Furniture            2       Student Chair	1499.00	  2021-12-31	3
+4       Food Items           2       Student Chair	1499.00	  2021-12-31	3
+5       House-keeping Goods  2       Student Chair	1499.00	  2021-12-31	3
+1       Electronics          3       Dark Chocolate	399.00	  2022-04-30	4
+2       Stationary           3       Dark Chocolate	399.00	  2022-04-30	4
+3       Furniture            3       Dark Chocolate	399.00	  2022-04-30	4
+4       Food Items           3       Dark Chocolate	399.00	  2022-04-30	4
+5       House-keeping Goods  3       Dark Chocolate	399.00	  2022-04-30	4
+1       Electronics          4       Microwave Oven	10500.00	2022-05-15	1
+2       Stationary           4       Microwave Oven	10500.00	2022-05-15	1
+3       Furniture            4       Microwave Oven	10500.00	2022-05-15	1
+4       Food Items           4       Microwave Oven	10500.00	2022-05-15	1
+5       House-keeping Goods	 4       Microwave Oven	10500.00	2022-05-15	1
+1       Electronics          5       AC             34500.00	2022-05-01	1
+2       Stationary           5       AC             34500.00	2022-05-01	1
+3       Furniture            5       AC             34500.00	2022-05-01	1
+4       Food Items           5       AC             34500.00	2022-05-01	1
+5       House-keeping Goods	 5       AC             34500.00	2022-05-01	1
+1       Electronics          6       Footware	      599.00	  2022-05-01	NULL
+2       Stationary           6       Footware	      599.00	  2022-05-01	NULL	
+3       Furniture            6       Footware	      599.00	  2022-05-01	NULL
+4       Food Items           6       Footware	      599.00	  2022-05-01	NULL
+5       House-keeping Goods	 6       Footware	      599.00	  2022-05-01	NULL
+
+Write query to display all records from category and product table that has any matching entry. (Hint: Use Inner Join)
+SELECT *
+FROM category
+INNER JOIN product
+ON category.cat_id = product.category_id;
+
+OR
+
+SELECT *
+FROM Category, Product
+WHERE Category.cat_id = Product.pro_id;
+
+cat_id  cat_name             pro_id  pro_name       MRP       MFG_DATE    category_id
+2       Stationary           1	     Parker Pen	    349.00	  2022-06-16	2
+3       Furniture	           2	     Student Chair	1499.00	  2021-12-31	3
+4       Food Items	         3	     Dark Chocolate	399.00	  2022-04-30	4
+1       Electronics	         4	     Microwave Oven	10500.00	2022-05-15	1
+1       Electronics	         5	     AC	            34500.00	2022-05-01	1
+
+:: Additional starts here ::
+You can specify column list to limit the number of columns and you can pick the columns of your choice from both tables. One special case of concern is when both tables have column with same name then in this case ambiguity (confusion) occurs such that DBMS unable to decide to fetch column from which table. To overcome this ambiguity we have to use table-name along with the column-name. To make the syntax short we can alias the table-name also.
+Say we have a table 'tblOne'
+C1 INT(6)
+C2 VARCHAR(4)
+
+Say we have another table 'tblTwo'
+C2 VARCHAR(4)
+C3 Double(4, 2)
+
+SELECT *
+FROM tblOne
+INNER JOIN tblTwo
+ON tblOne.C2 = tblTwo.C2; #No Error
+
+SELECT C1, C2, C3
+FROM tblOne
+INNER JOIN tblTwo
+ON tblOne.C2 = tblTwo.C2; #Ambuguity; multiple columns C2 are there
+
+SELECT C1, tblOne.C2, C3
+FROM tblOne
+INNER JOIN tblTwo
+ON tblOne.C2 = tblTwo.C2; #No Error
+
+SELECT C1, tblTwo.C2, C3
+FROM tblOne
+INNER JOIN tblTwo
+ON tblOne.C2 = tblTwo.C2; #No Error
+
+SELECT C1, T1.C2, C3
+FROM tblOne T1
+INNER JOIN tblTwo T2
+ON T1.C2 = T2.C2; #No Error
+
+SELECT C1, T2.C2, C3
+FROM tblOne T1
+INNER JOIN tblTwo T2
+ON T1.C2 = T2.C2; #No Error
+:: Additional ends here ::
+
+Write query to display all records from category and product table that has any matching entry including all categories. (Hint: Use Left Join)
+SELECT *
+FROM category
+LEFT JOIN product
+ON category.cat_id = product.category_id;
+
+cat_id  cat_name             pro_id  pro_name       MRP       MFG_DATE    category_id
+2	      Stationary	         1	     Parker Pen	    349.00	  2022-06-16	2
+3	      Furniture	           2	     Student Chair	1499.00	  2021-12-31	3
+4	      Food Items	         3	     Dark Chocolate	399.00	  2022-04-30	4
+1	      Electronics	         4	     Microwave Oven	10500.00	2022-05-15	1
+1	      Electronics	         5	     AC	            34500.00	2022-05-01	1
+5	      House-keeping Goods  NULL    NULL           NULL      NULL        NULL
+
+Write query to display all records from category and product table that has any matching entry including all products. (Hint: Use Right Join)
+SELECT *
+FROM category
+RIGHT JOIN product
+ON category.cat_id = product.category_id;
+
+cat_id  cat_name             pro_id  pro_name       MRP       MFG_DATE    category_id
+1	      Electronics	         4	     Microwave Oven	10500.00	2022-05-15	1
+1	      Electronics	         5	     AC	            34500.00	2022-05-01	1
+2	      Stationary	         1	     Parker Pen	    349.00	  2022-06-16	2
+3	      Furniture	           2	     Student Chair	1499.00	  2021-12-31	3
+4	      Food Items	         3	     Dark Chocolate	399.00	  2022-04-30	4
+NULL	  NULL                 6       Footware       599.00    2022-05-01  NULL
+
+Write query to find cat_name, pro_name, MRP for products such that include only those products whose price is more than 1000.00
+SELECT cat_name, pro_name, MRP
+FROM category
+INNER JOIN product
+ON category.cat_id = product.category_id
+WHERE MRP > 1000.00;
+
+::Output::
+cat_name      pro_name         MRP
+Furniture	    Student Chair	   1499.00
+Electronics   Microwave Oven   10500.00
+Electronics   AC               34500.00
+
+Write query to apply inner join on following tables-
+customer(cid, cname, dob, address)
+account(acc_no, balanace, opening_date, cid)
+transaction(tid, amount, transaction_date, acc_no)
+
+SELECT C.cid, cname, A.acc_no, balanace, opening_date, transaction_date, amount
+FROM customer C
+INNER JOIN account A
+ON C.cid = A.cid
+INNER JOIN transaction T
+ON T.acc_no = A.acc_no;
+
+Create table soldier with following structure-
+sol_id VARCHAR(4) PRIMARY KEY
+sol_name VARCHAR(4) NOT NULL
+sol_age INT
+col_id VARCHAR(4) Foreign Key
+
+INSERT INTO soldiers VALUES
+('S001', 'ABC', 34, NULL),
+('S002', 'BCD', 26, 'S001'),
+('S003', 'CDE', 28, 'S001'),
+('S004', 'DEF', 35, NULL),
+('S005', 'FGH', 26, 'S004');
+
+SELECT * FROM soldiers;
+sol_id sol_name sol_age col_id
+S001   ABC      34      NULL
+S002   BCD      26      S001
+S003   CDE      28      S001
+S004   DEF      35      NULL
+S005   FGH      26      S004
+
+Write query to display soldier name along with the colonel name
+
+Select S.sol_name "Soldier Name",
+       C.sol_name "Colonel Name"
+FROM soldier S
+INNER JOIN soldier C
+ON S.col_id = C.sol_id;
+
+soldier name    colonel name
+BCD             ABC
+CDE             ABC
+FGH             DEF
+
+Subquery Starts here
+Write query to view all records of table st
++--------+------+---------------+-------+------------------+
+| rollNo | name | email         | x_per | state            |
++--------+------+---------------+-------+------------------+
+|      1 | ABC  | abc@ms.com    | 77.42 | Karnataka        |
+|      2 | BCD  | bcd@ms.com    | 33.00 | Rajasthan        |
+|      3 | CDE  | cde@ms.com    | 77.24 | Maharashtra      |
+|      4 | def  | def@ms.com    | 74.69 | West Bengal      |
+|      5 | efg  | efg@ms.com    | 33.00 | Odisha           |
+|      6 | fgh  | fgh@ms.com    | 33.00 | Delhi            |
+|      7 | ghi  | ghi@ms.com    | 33.00 | Punjab           |
+|      8 | ijk  | ijk@ms.com    | 79.36 | Haryana          |
+|     10 | AED  | NULL          | 56.00 | Karnataka        |
++--------+------+---------------+-------+------------------+
+
+You need to write query to find record of students whose percentage is more than the maximum percentage of all scholars from Karnataka
+SELECT * FROM st
+WHERE x_per > (SELECT MAX(x_per) FROM st
+WHERE state = 'Karnataka');
++--------+------+---------------+-------+------------------+
+| rollNo | name | email         | x_per | state            |
++--------+------+---------------+-------+------------------+
+|      8 | ijk  | ijk@ms.com    | 79.36 | Haryana          |
++--------+------+---------------+-------+------------------+
+
+Write query to display name, x_per, average percentage, difference of student's percentage to average percentage for all students
+
+SELECT name, x_per, (SELECT AVG(x_per) FROM st) "AVG_PER", x_per - (SELECT AVG(x_per) FROM st) as "difference" FROM st;
++------+-------+-----------+------------+
+| name | x_per | AVG_PER   | difference |
++------+-------+-----------+------------+
+| ABC  | 77.42 | 57.607000 |  19.813000 |
+| BCD  | 33.00 | 57.607000 | -24.607000 |
+| CDE  | 77.24 | 57.607000 |  19.633000 |
+| def  | 74.69 | 57.607000 |  17.083000 |
+| efg  | 33.00 | 57.607000 | -24.607000 |
+| fgh  | 33.00 | 57.607000 | -24.607000 |
+| ghi  | 33.00 | 57.607000 | -24.607000 |
+| ijk  | 79.36 | 57.607000 |  21.753000 |
+| AED  | 56.00 | 57.607000 |  -1.607000 |
++------+-------+-----------+------------+
+
+Write a query demonstatre subquery in FROM clause
+SELECT max(x_per)
+FROM (SELECT name, x_per, email FROM st WHERE email IS NOT NULL) T
++------------+
+| max(x_per) |
++------------+
+|      79.36 |
++------------+
+
+SELECT max(10_per)
+FROM (SELECT name, x_per as 10_per, email FROM st WHERE email IS NOT NULL) T
++------------+
+| max(x_per) |
++------------+
+|      79.36 |
++------------+
+
+Write a query to find record of students whose percentage is maximum among all scholars
+SELECT *
+FROM st
+WHERE x_per = (
+	SELECT MAX(x_per) FROM st
+);
++--------+------+---------------+-------+------------------+
+| rollNo | name | email         | x_per | state            |
++--------+------+---------------+-------+------------------+
+|      8 | ijk  | ijk@ms.com    | 79.36 | Haryana          |
++--------+------+---------------+-------+------------------+
+
+Write a query to find state and average x_per for all state such that include only those states whose average x_per is more than that of Karnataka
+SELECT state, AVG(x_per)
+FROM st
+GROUP BY state
+HAVING AVG(x_per) > (
+	SELECT AVG(x_per) FROM st WHERE state = 'Karnataka'
+);
++------------------+------------+
+| state            | AVG(x_per) |
++------------------+------------+
+| Maharashtra      |  77.240000 |
+| West Bengal      |  74.690000 |
+| Haryana          |  79.360000 |
++------------------+------------+
+
+Add a record to the 'product' table with following data
+pro_id: 7, pro_name: snacks, MRP: 90.00 MFG_DATE: 2022-01-01 category_id: should be same as of category_id of Food Items
+INSERT INTO product
+VALUES
+(7, 'snacks', 90.00, '2022-01-01', (SELECT cat_id FROM category WHERE cat_name = 'Food Items')
+);
+
+Add a record to the 'st' table with following data
+rollNo: 11, name: PQR, email: pqr@gmail.com, state: Himachal Pradesh, x_per: maximum x_per of all students
+
+INSERT INTO st
+VALUES
+(11, 'PQR', 'pqr@gmail.com', (SELECT max(x_per) FROM st S), 'Himachal Pradesh');
+
+Write a query to find record of all scholars whose x_per is more than average x_per of all scholars
+SELECT * FROM st
+WHERE x_per > (SELECT AVG(x_per) FROM st);
+
+Write a query to find record of all scholars whose x_per is not equal to the x_per from the scholars of Odisha
+SELECT * FROM st
+WHERE x_per NOT IN(
+	SELECT x_per FROM st WHERE state = 'Odisha'
+);
++--------+------+---------------+-------+------------------+
+| rollNo | name | email         | x_per | state            |
++--------+------+---------------+-------+------------------+
+|      1 | ABC  | abc@ms.com    | 77.42 | Karnataka        |
+|      3 | CDE  | cde@ms.com    | 77.24 | Maharashtra      |
+|      4 | def  | def@ms.com    | 74.69 | West Bengal      |
+|      8 | ijk  | ijk@ms.com    | 79.36 | Haryana          |
+|     11 | PQR  | pqr@gmail.com | 79.36 | Himachal Pradesh |
++--------+------+---------------+-------+------------------+
+
+Write a query to find record of all scholars whose x_per is less than the x_per of any scholar of Karnataka
+SELECT * FROM st
+WHERE x_per < ANY(
+	SELECT x_per FROM st WHERE state = 'Karnataka'
+);
+
++--------+------+------------+-------+-------------+
+| rollNo | name | email      | x_per | state       |
++--------+------+------------+-------+-------------+
+|      2 | BCD  | bcd@ms.com | 33.00 | Rajasthan   |
+|      3 | CDE  | cde@ms.com | 77.24 | Maharashtra |
+|      4 | def  | def@ms.com | 74.69 | West Bengal |
+|      5 | efg  | efg@ms.com | 33.00 | Odisha      |
+|      6 | fgh  | fgh@ms.com | 33.00 | Delhi       |
+|      7 | ghi  | ghi@ms.com | 33.00 | Punjab      |
+|     10 | AED  | NULL       | 56.00 | Karnataka   |
++--------+------+------------+-------+-------------+
+
+Write a query to find record of all scholars whose x_per is more than the x_per of any scholar of Karnataka
+SELECT * FROM st
+WHERE x_per > ANY(
+	SELECT x_per FROM st WHERE state = 'Karnataka'
+);
++--------+------+---------------+-------+------------------+
+| rollNo | name | email         | x_per | state            |
++--------+------+---------------+-------+------------------+
+|      1 | ABC  | abc@ms.com    | 77.42 | Karnataka        |
+|      3 | CDE  | cde@ms.com    | 77.24 | Maharashtra      |
+|      4 | def  | def@ms.com    | 74.69 | West Bengal      |
+|      8 | ijk  | ijk@ms.com    | 79.36 | Haryana          |
+|     11 | PQR  | pqr@gmail.com | 79.36 | Himachal Pradesh |
++--------+------+---------------+-------+------------------+
+
+Write a query to find record of all scholars whose x_per is more than the x_per of all scholar of Karnataka
+SELECT * FROM st
+WHERE x_per > ALL(
+	SELECT x_per FROM st WHERE state = 'Karnataka'
+);
++--------+------+---------------+-------+------------------+
+| rollNo | name | email         | x_per | state            |
++--------+------+---------------+-------+------------------+
+|      8 | ijk  | ijk@ms.com    | 79.36 | Haryana          |
+|     11 | PQR  | pqr@gmail.com | 79.36 | Himachal Pradesh |
++--------+------+---------------+-------+------------------+
+
+Write a query to find record of all scholars whose x_per is less than the x_per of all scholar of Karnataka
+SELECT * FROM st
+WHERE x_per < ALL(
+	SELECT x_per FROM st WHERE state = 'Karnataka'
+);
+
++--------+------+------------+-------+-----------+
+| rollNo | name | email      | x_per | state     |
++--------+------+------------+-------+-----------+
+|      2 | BCD  | bcd@ms.com | 33.00 | Rajasthan |
+|      5 | efg  | efg@ms.com | 33.00 | Odisha    |
+|      6 | fgh  | fgh@ms.com | 33.00 | Delhi     |
+|      7 | ghi  | ghi@ms.com | 33.00 | Punjab    |
++--------+------+------------+-------+-----------+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Transaction Management
+Let say we have a table named as account that have following structure
+tid int(10) PRIMARY KEY
+name VARCHAR(20) NOT NULL
+amount int NOT NULL
+email VARCHAR(50) NOT NULL
+
+CREATE TABLE account(
+	tid int(10) PRIMARY KEY,
+	name VARCHAR(20) NOT NULL,
+	amount int NOT NULL,
+	email VARCHAR(50) NOT NULL
+);
+
+& make following entries
+1, Dinesh, 4000, dinesh@ms.com
+2, Jayesh, 4000, jayesh@ms.com
+
+INSERT INTO account
+VALUES
+(1, 'Dinesh', 4000, 'dinesh@ms.com'),
+(2, 'Jayesh', 4000, 'jayesh@ms.com');
+
+Say we want to transfer INR 1000 from dinesh’s account to jayesh’s account. Make sure that transaction should be atomic. Write query for this.
+START TRANSACTION;
+UPDATE account SET amount = (amount - 1000) WHERE tid = 1;
+UPDATE account SET amount = (amount + 1000) WHERE tid = 2;
+COMMIT;
+
+mysql> SELECT * FROM account;
++-----+--------+--------+---------------+
+| tid | name   | amount | email         |
++-----+--------+--------+---------------+
+|   1 | Dinesh |   3000 | dinesh@ms.com |
+|   2 | Jayesh |   5000 | jayesh@ms.com |
++-----+--------+--------+---------------+
+
+Say we want to transfer INR 500 from dinesh’s account to jayesh’s account. Use rollback to cancel transaction. Write query for this.
+START TRANSACTION;
+UPDATE account SET amount = (amount - 1000) WHERE tid = 1;
+UPDATE account SET amount = (amount + 1000) WHERE tid = 2;
+ROLLBACK;
+
+mysql> SELECT * FROM account;
++-----+--------+--------+---------------+
+| tid | name   | amount | email         |
++-----+--------+--------+---------------+
+|   1 | Dinesh |   3000 | dinesh@ms.com |
+|   2 | Jayesh |   5000 | jayesh@ms.com |
++-----+--------+--------+---------------+
+
+Say we want to transfer INR 500 from dinesh’s account to jayesh’s account then INR 1000 again. Use rollback to cancel the transaction of 1000/- but transaction of 500/- should be commited. Write query for this.
+START TRANSACTION;
+UPDATE account SET amount = (amount - 500) WHERE tid = 1;
+UPDATE account SET amount = (amount + 500) WHERE tid = 2;
+SAVEPOINT S1;
+UPDATE account SET amount = (amount - 1000) WHERE tid = 1;
+UPDATE account SET amount = (amount + 1000) WHERE tid = 2;
+ROLLBACK TO S1;
+COMMIT;
+
+mysql> SELECT * FROM account;
++-----+--------+--------+---------------+
+| tid | name   | amount | email         |
++-----+--------+--------+---------------+
+|   1 | Dinesh |   2500 | dinesh@ms.com |
+|   2 | Jayesh |   5500 | jayesh@ms.com |
++-----+--------+--------+---------------+
+
+Write query to demonstrate effect of off autocommit.
+SET AUTOCOMMIT = 0;
+INSERT INTO account (tid, name, amount, email) VALUES (3, 'karan',2000,'karan@ms.com');
+ROLLBACK;
+
+mysql> SELECT * FROM account;
++-----+--------+--------+---------------+
+| tid | name   | amount | email         |
++-----+--------+--------+---------------+
+|   1 | Dinesh |   2500 | dinesh@ms.com |
+|   2 | Jayesh |   5500 | jayesh@ms.com |
++-----+--------+--------+---------------+
+
+Write query to demonstrate effect of on autocommit.
+SET AUTOCOMMIT = 1;
+INSERT INTO account (tid, name, amount, email) VALUES (3, 'karan',2000,'karan@ms.com');
+ROLLBACK;
+
+mysql> SELECT * FROM account;
++-----+--------+--------+---------------+
+| tid | name   | amount | email         |
++-----+--------+--------+---------------+
+|   1 | Dinesh |   2500 | dinesh@ms.com |
+|   2 | Jayesh |   5500 | jayesh@ms.com |
+|   3 | Karan  |   2000 | karab@ms.com  |
++-----+--------+--------+---------------+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Write query to show indexes of table st
+SHOW INDEX FROM st;
++-------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+| Table | Non_unique | Key_name | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment | Visible | Expression |
++-------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+| st    |          0 | PRIMARY  |            1 | rollNo      | A         |          10 |     NULL |   NULL |      | BTREE      |         |               | YES     | NULL       |
+| st    |          0 | email    |            1 | email       | A         |          10 |     NULL |   NULL | YES  | BTREE      |         |               | YES     | NULL       |
++-------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+
+Write query to find number of records scanned by database to search scholar with AED
+EXPLAIN SELECT * FROM st WHERE name = 'AED';
++----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------------+
+| id | select_type | table | partitions | type | possible_keys | key  | key_len | ref  | rows | filtered | Extra       |
++----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------------+
+|  1 | SIMPLE      | st    | NULL       | ALL  | NULL          | NULL | NULL    | NULL |   10 |    10.00 | Using where |
++----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------------+
+
+Write query to create index on 'name' of table st;
+CREATE INDEX ind_name ON st(name);
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+Repeat "Write query to find number of records scanned by database to search scholar with AED"
+EXPLAIN SELECT * FROM st WHERE name = 'AED';
++----+-------------+-------+------------+------+---------------+----------+---------+-------+------+----------+-------+
+| id | select_type | table | partitions | type | possible_keys | key      | key_len | ref   | rows | filtered | Extra |
++----+-------------+-------+------------+------+---------------+----------+---------+-------+------+----------+-------+
+|  1 | SIMPLE      | st    | NULL       | ref  | ind_name      | ind_name | 83      | const |    1 |   100.00 | NULL  |
++----+-------------+-------+------------+------+---------------+----------+---------+-------+------+----------+-------+
+
+Repeat "Write query to show indexes of table st"
+EXPLAIN SELECT * FROM st WHERE name = 'AED';
+--------+---------+------------+
+| Table | Non_unique | Key_name | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment | Visible | Expression |
++-------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+| st    |          0 | PRIMARY  |            1 | rollNo      | A         |          10 |     NULL |   NULL |      | BTREE      |         |               | YES     | NULL       |
+| st    |          0 | email    |            1 | email       | A         |          10 |     NULL |   NULL | YES  | BTREE      |         |               | YES     | NULL       |
+| st    |          1 | ind_name |            1 | name        | A         |          10 |     NULL |   NULL | YES  | BTREE      |         |               | YES     | NULL       |
++-------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+

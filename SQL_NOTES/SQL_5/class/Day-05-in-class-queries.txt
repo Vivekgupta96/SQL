@@ -1,0 +1,245 @@
+Write query to see the list of databases.
+SHOW DATABASES;
+
+Create a database with name sb_101_block_25.
+CREATE DATABASE sb_101_block_25;
+
+Write query to use the database sb_101_block_25
+USE sb_101_block_25;
+
+Write query to create a table student with following structure
+field       data-type    Description
+rollNo	    int(8)       PRIMARY KEY
+name	      varchar(20)  NOT NULL
+email	      varchar(20)  UNIQUE
+x_per       double(5,2)  Default value 33.0
+state       varchar(25)  
+
+CREATE TABLE student(
+rollNo int(8) PRIMARY KEY,
+name varchar(20) NOT NULL,
+email varchar(20) UNIQUE,
+x_per double(5,2) Default(33.0),
+state varchar(25)
+);
+
+Write Query to see the list of tables
+SHOW TABLES;
+
+Write Query to see the structure of table student
+DESCRIBE student; OR DESC student;
+
+Write Query to add following record in the table student
+1, 'ABC', 'abc@ms.com', 75.42, 'Karnataka'
+2, 'BCD', 'bcd@ms.com', 33.00, 'Rajasthan'
+
+INSERT INTO student
+VALUES
+(1, 'ABC', 'abc@ms.com', 75.42, 'Karnataka');
+
+INSERT INTO student
+(state, name, email, rollNo)
+VALUES
+('Rajasthan', 'BCD', 'bcd@ms.com', 2)
+
+[View records of the table]
+
+Now try to add following record in the table student & observe the output (or error message)
+1, 'BCD', 'bcd@ms.com', 85.42, 'Tamilnadu'
+3, null, ' cde@ms.com', 66.24, 'Haryana'
+3, 'CDE', 'abc@ms.com', 65.24, 'Rajasthan'
+
+Write Query to add new column dob with data type date
+ALTER TABLE student
+ADD dob date;
+
+[
+	Write Query to see the structure of table student
+	DESC student;
+]
+
+Write Query to change the size of email_id to 50 from 20
+ALTER TABLE student
+MODIFY email VARCHAR(50);
+
+[
+	Write Query to see the structure of table student
+	DESC student;
+]
+
+Write Query to change the name of column from dob to birth_date
+ALTER TABLE student
+CHANGE dob birth_date date;
+
+[
+	Write Query to see the structure of table student
+	DESC student;
+]
+
+Write Query to change the table name from student to st
+ALTER TABLE student
+RENAME TO st;
+
+[
+	Write Query to see the list of tables
+	SHOW TABLES;
+]
+
+Write Query to drop the column birth_date from table st
+ALTER TABLE st
+DROP birth_date;
+
+[
+	Write Query to see the structure of table student
+	DESC student;
+]
+
+Write Query to drop primary key
+ALTER TABLE st
+DROP PRIMARY KEY;
+
+[
+	Write Query to see the structure of table student
+	DESC student;
+]
+
+Write Query to drop NOT NULL from column name
+ALTER TABLE st
+MODIFY name VARCHAR(20) NULL;
+
+[
+	Write Query to see the structure of table student
+	DESC student;
+]
+
+Write Query to drop unique constraint from column email
+SHOW CREATE TABLE st;
++-------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table | Create Table                                                                                                                                                                                                                                                                                    |
++-------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| st    | CREATE TABLE `st` (
+  `rollNo` int NOT NULL,
+  `name` varchar(20) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `x_per` double(5,2) DEFAULT (33.0),
+  `state` varchar(25) DEFAULT NULL,
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci |
++-------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+ALTER TABLE st DROP INDEX email;
+
+[
+	Write Query to see the structure of table student
+	DESC student;
+]
+
+Write Query to drop default from column x_per
+ALTER TABLE st
+ALTER x_per DROP DEFAULT;
+
+[
+	Write Query to see the structure of table student
+	DESC student;
+]
+
+Write Query to make the rollNo column as primary key
+ALTER TABLE st
+ADD PRIMARY KEY(rollNo);
+
+[
+	Write Query to see the structure of table student
+	DESC student;
+]
+
+Write Query to apply unique constraint on column email
+ALTER TABLE st
+MODIFY email VARCHAR(50) UNIQUE;
+
+[
+	Write Query to see the structure of table student
+	DESC student;
+]
+
+Write query to apply default value 33.00 for column x_per
+ALTER TABLE st
+ALTER x_per SET DEFAULT 33.0;
+[
+	Write Query to see the structure of table student
+	DESC student;
+]
+
+
+[Write Query to see the structure of table student]
+
+Add following records in the table st
+3, CDE , cde@ms.com, 75.24, Maharashtra
+4, def , def@ms.com, 72.69, West Bengal
+5, efg , efg@ms.com, 33.00, Odisha
+6, fgh , fgh@ms.com, 33.00, Delhi
+7, ghi , ghi@ms.com, 33.00, Punjab
+8, ijk , ijk@ms.com, 77.36, Haryana
+9, jkl , jkl@ms.com, 85.55, Rajasthan
+10, AED , NULL, 56.00, Karnataka
+
+INSERT INTO st
+VALUES
+(3, 'CDE' , 'cde@ms.com', 75.24, 'Maharashtra');
+
+INSERT INTO st
+(rollNo, name, email, x_per, state)
+VALUES
+(4, 'def' , 'def@ms.com', 72.69, 'West Bengal');
+
+INSERT INTO st
+(rollNo, name, email, state)
+VALUES
+(5, 'efg', 'efg@ms.com', 'Odisha'),
+(6, 'fgh', 'fgh@ms.com', 'Delhi'),
+(7, 'ghi', 'ghi@ms.com', 'Punjab');
+
+INSERT INTO st
+VALUES
+(8, 'ijk', 'ijk@ms.com', 77.36, 'Haryana'),
+(9, 'jkl' , 'jkl@ms.com', 85.55, 'Rajasthan'),
+(10, 'AED' , NULL, '56.00', 'Karnataka');
+
+[View records of the table]
+
+Query to increase the x_per by 2% for all scholars whose x_per is more than 70.0
+UPDATE st SET x_per = x_per + 2 WHERE x_per > 70.0;
+
+Query to set percentage to 66.00, state to kerala for student efg
+UPDATE st SET x_per = 66.00, state = 'kerela' WHERE name = 'efg';
+
+[View records of the table]
+
+Query to delete students whose percentage is more than or equal to 85.00
+DELETE FROM st WHERE x_per >= 85.00;
+
+Write query to view all records of the table
+SELECT * FROM st;
+
+Write query to view all records of the table such that only rollNo, name and x_per column should be in result.
+SELECT rollNo, name, x_per FROM st;
+
+Write query to display all distict value for column x_per
+SELECT DISTINCT(x_per) FROM st;
+
+Write query to view all records of the table such that rollNo should be displayed with heading Roll Number, name should be displayed with heading Student Name and x_per should be displayed with heading Inter Exam Percentage.
+SELECT rollNo as "Roll Number", name as "Student Name", x_per as "Inter Exam Percentage" FROM st;
+
+OR
+
+SELECT rollNo "Roll Number", name "Student Name", x_per "Inter Exam Percentage" FROM st;
+
+Write query to view all records of the table such that rollNo should be displayed with heading RN, name should be displayed with heading SName and x_per should be displayed with heading 10_Per.
+SELECT rollNo RN, name SName, x_per 10_Per FROM st;
+
+OR
+
+SELECT rollNo as RN, name as SName, x_per as 10_Per FROM st;
+
+OR
+
+SELECT rollNo as "RN", name as "SName", x_per as "10_Per" FROM st;

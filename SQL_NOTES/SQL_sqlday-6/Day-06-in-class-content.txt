@@ -1,0 +1,111 @@
+%: Any number of characters
+_: one _ is for one character
+
+whose name starts with letter 'a'
+SELECT * FROM st
+WHERE name LIKE 'a%';
+ankita
+anuj
+aj
+a
+
+whose name contains letter 'a'
+SELECT * FROM st
+WHERE name LIKE '%a%';
+rana
+ajam
+Rachit
+a
+
+whose name ends with letter 'a'
+SELECT * FROM st
+WHERE name LIKE '%a';
+
+ankita
+Anuja
+a
+
+whose name has second last letter 'a'
+SELECT * FROM st
+WHERE name LIKE '%a_';
+
+whose name has second letter 'a'
+SELECT * FROM st
+WHERE name LIKE '_a%';
+
+whose name is of three letters and the middle letter is 'a'
+SELECT * FROM st
+WHERE name LIKE '_a_';
+
+round(value, decimal places = 0)
+1001.25 -> 1001.00
+2002.75 -> 2003.00
+
+SELECT round(144.49), round(144.50), round(144.51);
+144.49 ... (144 + 145)/2 .... 144.5
+
+current-value < mid-value -> go for the previous value
+current-value >= mid-value -> go for the next value
+
+144.49 < 144.5 ... 144
+144.50 >= 144.5 ... 145
+144.51 >= 144.5 ... 145
+
+SELECT round(144.44, 1), round(144.45, 1), round(144.46, 1);
+
+144.44, 1 -> (144.4 + 144.5)/2 -> 144.45
+144.44 < 144.45 .. 144.4
+144.45 >= 144.45 .. 144.5
+144.46 >= 144.45 .. 144.5
+
+truncate(value, decimal places)
+SELECT truncate(144.44, 1), truncate(144.45, 1), truncate(144.46, 1);
+144.4 144.4 144.4
+
+SELECT CEIL(1.1), CEIL(1.5), CEIL(1.9);
+SELECT FLOOR(1.9), FLOOR(1.5), FLOOR(1.1);
+
+SELECT greatest(10, 20 ,30, 40, 50), least(10, 20 ,30, 40, 50);
+
+table: t1
+marks
+100.00
+50.00
+null
+
+SELECT AVG(marks) FROM t1;
+75
+
+SELECT MAX(marks) FROM t1;
+100.00
+
+DIFFERENCE BETWEEN delete, truncate and drop statement
+CREATE TABLE t1(
+	c1 int primary key auto_increment,
+	c2 VARCHAR(15)
+);
+
+INSERT INTO t1 (c2) VALUES ('ABC'), ('BCD');
+
+SELECT * FROM t1;
+
+DELETE FROM t1 WHERE c2 LIKE '%B%';
+INSERT INTO t1 (c2) VALUES ('CDE');
+SELECT * FROM t1;
+
+- DELETE is used to delete record selectively
+- DELETE do not reset the value of auto increment column
+
+TRUNCATE TABLE t1;
+SELECT * FROM t1;
+INSERT INTO t1 (c2) VALUES ('DEF');
+SELECT * FROM t1;
+
+- TRUNCATE is used to delete all records of the table in one shot
+- TRUNCATE resets the value of auto increment column
+
+INSERT INTO t1 (c2) VALUES ('EFG');
+SELECT * FROM t1;
+DROP TABLE t1;
+
+- DROP is used to delete tyable structure so all the records will be deleted automatically

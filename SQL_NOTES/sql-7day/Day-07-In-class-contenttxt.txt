@@ -1,0 +1,175 @@
+Agenda
+Subquery (Very easy)
+Transaction (Very easy)
+Join (Moderate, small)
+
+Key: Assignment
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+subquery: query inside another query
+
+The inner query is getting executed first and result is provided to outer query. The outer query may use the result for further computation.
+
+The subquery can be written at 4 difference claused of SELECT statement
+1. SELECT clause
+2. FROM clause
+3. WHERE clause
+4. HAVING clause
+
+You can write subquery for DML statements also.
+
+The subqury that returns a single value is called single row subquery. Use < > <= >= = != to compare the result of single row subquery
+
+The subqury that returns a multiple value is called multi row subquery. Use IN, NOT IN, ANY, ALL operators to compare the result of single row subquery
+
+Write a query to find record of students whose percentage is maximum among all scholars
+
+#SELECT *
+#FROM st
+#WHERE x_per = MAX(x_per);
+
+The above query is error because we cannot use aggregate function with WHERE clause
+
+SELECT MAX(x_per)
+FROM st;
+
+79.36
+
+SELECT *
+FROM st
+WHERE x_per = 79.36;
+
+Solution
+#using subquery with the WHERE clause
+SELECT *
+FROM st
+WHERE x_per = (
+	SELECT MAX(x_per)
+	FROM st
+);
+
+
+Transaction
+Vikas wants to transfer 1000/- to account of Ritik
+
+Vikas opening balance: 5000
+Ritik opening balance: 2500
+
+Vikas initiated transfer
+
+Case-01
+UPDATE account SET balance = balance - 1000 WHERE name = 'Vikas'; [executed]
+UPDATE account SET balance = balance + 1000 WHERE name = 'Ritik'; [executed]
+all happy
+
+Vikas opening balance: 4000
+Ritik opening balance: 3500
+
+Vikas opening balance: 5000
+Ritik opening balance: 2500
+
+Case-02
+UPDATE account SET balance = balance - 1000 WHERE name = 'Vikas'; [executed]
+[DBMS crashed/power failure/OS crash/power shock]
+UPDATE account SET balance = balance + 1000 WHERE name = 'Ritik';
+
+Vikas opening balance: 4000
+Ritik opening balance: 2500
+
+A (Atomicity): 
+C (Consistency): 
+I (Isolation): 
+D (Durability): 
+
+Abhirup --> 1000 ----> Vikas [10:00]
+Abhirup <-- 1000 <---- Vikas [10:01]
+
+
+Join
+To fetch record from more than one table
+- Cross Join
+	Degree to tables: added
+	Cardinality to the tables: multiples
+	This join is least used (almost not used)
+	Father of all join operations
+	
+	SELECT column-list
+	FROM left-table CROSS JOIN right-table;
+	
+	OR
+	
+	SELECT column-list
+	FROM left-table, right-table;
+	
+- Inner Join
+	Used to fetch only common entries from participating tables
+	SELECT column-list
+	FROM left-table INNER JOIN right-join
+	ON left-table.col-name = right-table.col-name; (Better Cjoice it is fast)
+	
+	OR
+	
+	SELECT column-list
+	FROM left-table, right-table
+	WHERE left-table.col-name = right-table.col-name;
+	
+	SELECT *
+	FROM category INNER JOIN product
+	ON category.cat_id = product.category_id;
+	
+	SELECT *
+	FROM category, product
+	WHERE category.cat_id = product.category_id;
+	
+- Left Join
+	Used to fetch all entried from left side + common entries from participating tables
+	SELECT column-list
+	FROM left-table LEFT JOIN right-join
+	ON left-table.col-name = right-table.col-name;
+	
+	SELECT *
+	FROM category LEFT JOIN product
+	ON category.cat_id = product.category_id;
+	
+- Right Join
+	Used to fetch all entried from right side + common entries from participating tables
+	SELECT column-list
+	FROM left-table RIGHT JOIN right-join
+	ON left-table.col-name = right-table.col-name;
+	
+	SELECT *
+	FROM category RIGHT JOIN product
+	ON category.cat_id = product.category_id;
+
+- Self Join
+
+category
+cat_id  cat_name
+1       Electronics
+2       Stationary
+3		Furniture
+4		Food Items
+5		House-keeping Goods
+PRIMARY KEY: cat_id
+
+product
+pro_id	pro_name	     MRP	MFG_DATE	category_id
+1       Parker Pen       349     2022-06-16  2
+2       Student Chair    1499    2021-12-31  3
+3       Dark Chocolate   399     2022-04-30  4
+4       Microwave Oven   10500   2022-05-15  1
+5       AC               34500   2022-05-01  1
+6       Footware         599     2022-05-01  NULL
+PRIMARY KEY: pro_id
+FOREIGN KEY: category_id
+
+category: Primary/Master/Parent Table
+product: Secondary/Slave/Child Table
+
+foreign key: it is refernce of primary key/unique key column in another table
+Foreign key is used to create association among multiple table
+
+Referential integrity constraint
+1. For foreign key values are : any value from referenced column + null
+2. If any entry from the parent table is deleted then make sure no associated entry is available in the child table. To make sure then same, we have two different strategies
+a. SET NULL (set the foreign key column's value to null for all associated entries)
+b. CASCADE (delete entries from the child table also)

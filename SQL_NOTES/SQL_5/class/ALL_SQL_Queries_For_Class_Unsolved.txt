@@ -1,0 +1,505 @@
+Write query to see the list of databases.
+
+Create a database with name sb_101_block_25.
+
+Write query to use the database sb_101_block_25
+
+Write query to create a table student with following structure
+field       data-type    Description
+rollNo	    int(8)       PRIMARY KEY
+name	    varchar(20)  NOT NULL
+email	    varchar(20)  UNIQUE
+x_per       double(5,2)  Default value 33.0
+state       varchar(25)  
+
+Write Query to see the list of tables
+
+Write Query to see the structure of table student
+
+Write Query to add following record in the table student
+1, 'ABC', 'abc@ms.com', 75.42, 'Karnataka'
+2, 'BCD', 'bcd@ms.com', 33.00, 'Rajasthan'
+
+[View records of the table]
+
+Now try to add following record in the table student & observe the output (or error message)
+1, 'BCD', 'bcd@ms.com', 85.42, 'Tamilnadu'
+3, null, ' cde@ms.com', 66.24, 'Haryana'
+3, 'CDE', 'abc@ms.com', 65.24, 'Rajasthan'
+
+Write Query to add new column dob with data type date
+
+[Write Query to see the structure of table student]
+
+Write Query to change the size of email_id to 50 from 20
+
+[Write Query to see the structure of table student]
+
+Write Query to change the name of column from dob to birth_date
+
+[Write Query to see the structure of table student]
+
+Write Query to change the table name from student to st
+
+[Write Query to see the list of tables]
+
+Write Query to drop the column birth_date from table st
+
+[Write Query to see the structure of table student]
+
+Write Query to drop primary key
+
+Write Query to drop NOT NULL from column name
+
+Write Query to drop unique constraint from column email
+
+Write Query to drop default from column x_per
+
+[Write Query to see the structure of table student]
+
+Write Query to make the rollNo column as primary key
+ALTER TABLE st ADD PRIMARY KEY(rollNo);
+
+Write Query to apply not null on column 'name'
+ALTER TABLE st MODIFY name VARCHAR(20) NOT NULL;
+
+Write Query to apply unique constraint on column email
+ALTER TABLE st MODIFY email VARCHAR(50) UNIQUE;
+
+Write query to apply default value 33.00 for column x_per
+ALTER TABLE st ALTER x_per SET DEFAULT 33.0;
+
+[Write Query to see the structure of table student]
+
+Add following records in the table st
+3, CDE , cde@ms.com, 75.24, Maharashtra
+4, def , def@ms.com, 72.69, West Bengal
+5, efg , efg@ms.com, 33.00, Odisha
+6, fgh , fgh@ms.com, 33.00, Delhi
+7, ghi , ghi@ms.com, 33.00, Punjab
+8, ijk , ijk@ms.com, 77.36, Haryana
+9, jkl , jkl@ms.com, 85.55, Rajasthan
+10, AED , NULL, 56.00, Karnataka
+
+[View records of the table]
+
+Query to increase the x_per by 2% for all scholars whose x_per is more than 70.0
+
+Query to set percentage to 66.00, state to kerala for student efg
+
+[View records of the table]
+
+Query to delete students whose percentage is more than or equal to 85.00
+
+Write query to view all records of the table
+
+Write query to view all records of the table such that only rollNo, name and x_per column should be in result.
+
+Write query to display all distict value for column x_per
+
+Write query to view all records of the table such that rollNo should be displayed with heading Roll Number, name should be displayed with heading Student Name and x_per should be displayed with heading Inter Exam Percentage.
+
+Write query to view all records of the table such that rollNo should be displayed with heading RN, name should be displayed with heading SName and x_per should be displayed with heading 10_Per.
+
+Write query to add 10 to x_per and display with heading new_x_per (No need to use update query because this is one time result)
+
+Write query to find all students whose percentage is is more than 74.69
+
+Write query to find all students whose percentage is is more than or equal to 74.69
+
+Write query to find rollNo as RN, name as Sname, x_per as 10_per whose x_per is less than 66.00
+
+Write query to find all students whose x_per is less than or equal to 66.00
+
+Write query to find all students whose state is Karnataka
+
+Write query to find all students whose x_per is not equal to 33.00
+
+Write a query to find all students whose x_per is more than or equals to 33.00 and less than or equals to 74.69;
+
+Write a query to find all students whose x_per is neither more than or equals to 33.00 and nor less than or equals to 74.69;
+
+Write a query to find all students whose percentage is more than or equal to 60.00 and the student must be from state Karnataka
+
+Write a query to find all students whose percentage is more than or equal to 60.00 or the student must be from state Karnataka
+
+Write a query to find all students whose percentage is more than 60.00 and less than 77.65 or whose state is Karnataka
+
+Write a query to find all scholars whose state is either Karnataka, Punjab or Rajasthan
+
+Write a query to find all scholars whose state is neither Karnataka nor Punjab nor Rajasthan
+
+Write a query to find all scholars whose email is null
+
+Write a query to find all scholars whose email is not null
+
+Write a query to find all scholars whose name starts with letter 'a'
+
+Write a query to find all scholars whose name ends with letter 'd'
+
+Write a query to find all scholars whose name has letter 'C' anywhere
+
+Write a query to find all scholars whose name has second letter 'B'
+
+Write a query to find all scholars whose name has second last letter 'C'
+
+Write a query to find all scholars whose name has 3 letters and middle letter should be 'D'
+
+Write a query to show the records of students in the ascending order of x_per
+
+Write a query to show the records of students in the ascending order of the x_per if tie in x_per they should be displayed in the descending order of the rollNo
+
+Write a query to show name, email and x_per of students in the descending order of name
+
+<!-- Queries for single row function -->
+
+Write a query to display minimum percentage among all students.
+
+Write a query to display maximum percentage among all students.
+
+Write a query to display total percentage of all students.
+
+Write a query to display average percentage of all students.
+
+Write a query to count total students who have an email idm count total students who have x_per and counting of total students.
+
+Write a query to rollno, name and email of all students but if a student do not have an email then 'No Email' should be displayed instead of null
+
+Write a query to name, x_per and remark for student such that remark should be according to following criteria
+WHEN x_per < 33.00 - 'FAIL'
+WHEN x_per < 60.00 - 'PASS, IMPROVEMENT REQUIRED'
+WHEN x_per < 75.00 - 'PASS, GOOD JOB'
+ELSE 'GENIUS'
+
+
+
+For Multi row functions, Group by and having clause
+mysql> CREATE TABLE employee(
+	Eid VARCHAR(4) PRIMARY KEY,
+	Ename VARCHAR(10) NOT NULL,
+	Dept VARCHAR(10) NOT NULL,
+	Salary INT,
+	Designation VARCHAR(10) NOT NULL
+);
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> INSERT INTO employee
+VALUES
+('E001', 'ABC', 'SALES', 25000, 'SM'),
+('E002', 'PQR', 'SALES', 35000, 'SM'),
+('E003', 'RTY', 'HRM', 58000, 'SSM'),
+('E004', 'RED', 'HRM', 38000, 'HR'),
+('E005', 'YUT', 'BDO', 25000, 'BM'),
+('E006', 'RFT', 'BDO', 48000, 'BM');
+Query OK, 6 rows affected (0.00 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+Write query to find sum of salaries paid department wise Using WHERE clause
+Write query to find sum of salaries paid department wise Using GROUP BY clause
+
+[FROM JANUARY, WE GONNA HAVE SALARY DOUBLED, OKAY]
+FROM, JOIN, WHERE, GROUP BY, HAVING, SELECT, DISTINCT,ORDER BY
+How the above query will execute-
+1. FROM employee
+Eid   Ename  Dept     Salary  Designation
+E001	ABC	   SALES	  25000   SM
+E002	PQR	   SALES	  35000   SM
+E003	RTY	   HRM	    58000   SSM
+E004	RED	   HRM	    38000   HR
+E005	YUT	   BDO	    25000   BM
+E006	RFT	   BDO	    48000   BM
+
+2. GROUP BY Dept
+Group-1
+E001	ABC	   SALES	  25000   SM
+E002	PQR	   SALES	  35000   SM
+
+Group-2
+E003	RTY	   HRM	    58000   SSM
+E004	RED	   HRM	    38000   HR
+
+Group-3
+E005	YUT	   BDO	    25000   BM
+E006	RFT	   BDO	    48000   BM
+
+3. SELECT Dept, SUM(Salary) "TOTAL_SAL"
+Dept   TOTAL_SAL
+SALES  60000
+HRM    96000
+BDO    73000
+
+Write query to find counting of employee TOTAL_EMP for combinatio of dept & designation
+
+1. FROM employee
+Eid   Ename  Dept     Salary  Designation
+E001	ABC	   SALES	  25000   SM
+E002	PQR	   SALES	  35000   SM
+E003	RTY	   HRM	    58000   SSM
+E004	RED	   HRM	    38000   HR
+E005	YUT	   BDO	    25000   BM
+E006	RFT	   BDO	    48000   BM	
+
+2. GROUP BY Dept, designation
+Group-1
+E001	ABC	   SALES	  25000   SM
+E002	PQR	   SALES	  35000   SM
+Group-2
+E003	RTY	   HRM	    58000   SSM
+Group-3
+E004	RED	   HRM	    38000   HR
+Group-4
+E005	YUT	   BDO	    25000   BM
+E006	RFT	   BDO	    48000   BM
+
+3. SELECT dept, designation, COUNT(*) "TOTAL_EMP"
+dept  designation  TOTAL_EMP
+BDO	  BM	         2
+HRM	  HR	         1
+HRM	  SSM	         1
+SALES	SM	         2
+
+Write query to find department name and total salary paid department wise such that you need to count only those employees whose salary is more than 25000; display the records in the descending order of total salary
+
+1. FROM employee
+Eid   Ename  Dept     Salary  Designation
+E001	ABC	   SALES	  25000   SM
+E002	PQR	   SALES	  35000   SM
+E003	RTY	   HRM	    58000   SSM
+E004	RED	   HRM	    38000   HR
+E005	YUT	   BDO	    25000   BM
+E006	RFT	   BDO	    48000   BM	
+
+2. WHERE salary > 25000
+Eid   Ename  Dept     Salary  Designation
+E002	PQR	   SALES	  35000   SM
+E003	RTY	   HRM	    58000   SSM
+E004	RED	   HRM	    38000   HR
+E006	RFT	   BDO	    48000   BM	
+
+3. GROUP BY Dept
+Eid   Ename  Dept     Salary  Designation
+Group-1
+E002	PQR	   SALES	  35000   SM
+
+Group-2
+E003	RTY	   HRM	    58000   SSM
+E004	RED	   HRM	    38000   HR
+
+Group-3
+E006	RFT	   BDO	    48000   BM
+
+4. SELECT Dept, SUM(salary) "TOTAL_SAL"
+Dept   TOTAL_SAL
+SALES  35000
+HRM    96000
+BDO    48000
+
+5. ORDER BY TOTAL_SAL DESC;
+Dept   TOTAL_SAL
+HRM    96000
+BDO    48000
+SALES  35000
+
+Write query to find department name and total salary paid department wise such that you need to include only those departments whose sum of salary is more than 65000
+
+1. FROM employee
+Eid   Ename  Dept     Salary  Designation
+E001	ABC	   SALES	  25000   SM
+E002	PQR	   SALES	  35000   SM
+E003	RTY	   HRM	    58000   SSM
+E004	RED	   HRM	    38000   HR
+E005	YUT	   BDO	    25000   BM
+E006	RFT	   BDO	    48000   BM
+
+2. GROUP BY dept
+Group-1
+E001	ABC	   SALES	  25000   SM
+E002	PQR	   SALES	  35000   SM
+
+Group-2
+E003	RTY	   HRM	    58000   SSM
+E004	RED	   HRM	    38000   HR
+
+Group-3
+E005	YUT	   BDO	    25000   BM
+E006	RFT	   BDO	    48000   BM
+
+3. HAVING SUM(salary) > 65000;
+Group-2
+E003	RTY	   HRM	    58000   SSM
+E004	RED	   HRM	    38000   HR
+
+Group-3
+E005	YUT	   BDO	    25000   BM
+E006	RFT	   BDO	    48000   BM
+
+4. SELECT dept, SUM(salary) "TOTAL_SAL"
+dept    TOTAL_SAL
+HRM     96000
+BDO     73000
+
+5. ORDER BY TOTAL_SAL
+dept    TOTAL_SAL
+BDO     73000
+HRM     96000
+
+Query to find department, average salary of the employees department wise such that include only those employees whose designation has letter 'M' anywhere; consider only those groups whose total salary is more than or equal to 60000. Display the records in the descending order of the average salaries.
+
+1. FROM employee
+Eid   Ename  Dept     Salary  Designation
+E001	ABC	   SALES	  25000   SM
+E002	PQR	   SALES	  35000   SM
+E003	RTY	   HRM	    58000   SSM
+E004	RED	   HRM	    38000   HR
+E005	YUT	   BDO	    25000   BM
+E006	RFT	   BDO	    48000   BM
+
+2. WHERE designation LIKE '%M%'
+Eid   Ename  Dept     Salary  Designation
+E001	ABC	   SALES	  25000   SM
+E002	PQR	   SALES	  35000   SM
+E003	RTY	   HRM	    58000   SSM
+E005	YUT	   BDO	    25000   BM
+E006	RFT	   BDO	    48000   BM
+
+3. GROUP BY dept
+Group-1
+E001	ABC	   SALES	  25000   SM
+E002	PQR	   SALES	  35000   SM
+
+Group-2
+E003	RTY	   HRM	    58000   SSM
+
+Group-3
+E005	YUT	   BDO	    25000   BM
+E006	RFT	   BDO	    48000   BM
+
+4. HAVING SUM(salary) >= 60000
+Group-1
+E001	ABC	   SALES	  25000   SM
+E002	PQR	   SALES	  35000   SM
+	
+Group-3
+E005	YUT	   BDO	    25000   BM
+E006	RFT	   BDO	    48000   BM
+
+5. SELECT dept, AVG(salary) "AVG_SALARY"
+dept    AVG_SALARY
+SALES   30000
+BDO     36500
+
+6. ORDER BY AVG_SALARY DESC;
+dept    AVG_SALARY
+BDO     36500
+SALES   30000
+
+Write query to truncate table employee
+
+	[Write query to view record]
+
+Write query to drop table employee
+
+	[Write query to show table employee]
+
+
+
+Write query to create table category:
+cat_id int(6) PRIMARY KEY,
+cat_name varchar(20) NOT NULL
+
+INSERT INTO category
+VALUES
+(1, 'Electronics'),
+(2, 'Stationary'),
+(3, 'Furniture'),
+(4, 'Food Items'),
+(5, 'House-keeping Goods');
+
+Write query to create table product:
+pro_id INT(8) PRIMARY KEY,
+pro_name VARCHAR(20) NOT NULL,
+MRP double(7,2),
+MFG_DATE date NOT NULL,
+category_id INT(6) Foreign Key
+
+INSERT INTO product
+VALUES
+(1, 'Parker Pen', 349, '2022-06-16', 2),
+(2, 'Student Chair', 1499, '2021-12-31', 3),
+(3, 'Dark Chocolate', 399, '2022-04-30', 4),
+(4, 'Microwave Oven', 10500, '2022-05-15', 1),
+(5, 'AC', 34500, '2022-05-01', 1),
+(6, 'Footware', 599, '2022-05-01', NULL);
+
+[Write Query to see all records of table category]
+[Write Query to see all records of table product]
+
+Write query to apply cross join on both tables
+Write query to display all records from category and product table that has any matching entry. (Hint: Use Inner Join)
+Write query to display all records from category and product table that has any matching entry including all categories. (Hint: Use Left Join)
+Write query to display all records from category and product table that has any matching entry including all products. (Hint: Use Right Join)
+Write query to find cat_name, pro_name, MRP for all product such that include only those products whose price is more than 1000.00
+
+Write query to apply inner join on following tables-
+customer(cid, cname, dob, address)
+account(acc_no, balanace, opening_date, cid)
+transaction(tid, amount, transaction_date, acc_no)
+
+Create table soldier with following structure-
+sol_id VARCHAR(4) PRIMARY KEY
+sol_name VARCHAR(4) NOT NULL
+sol_age INT
+col_id VARCHAR(4) Foreign Key
+
+INSERT INTO soldiers VALUES
+('S001', 'ABC', 34, NULL),
+('S002', 'BCD', 26, 'S001'),
+('S003', 'CDE', 28, 'S001'),
+('S004', 'DEF', 35, NULL),
+('S005', 'FGH', 26, 'S004');
+
+Write query to display soldier name along with the colonel name
+
+
+Subquery Starts here
+[Write query to view all records of table st]
+You need to write query to find record of students whose percentage is more than the maximum percentage of all scholars from Karnataka
+Write query to display name, x_per, average percentage, difference of student's percentage to average percentage for all students
+Write a query demonstatre subquery in FROM clause
+Write a query to find record of students whose percentage is maximum among all scholars
+Write a query to find state and average x_per for all state such that include only those states whose average x_per is more than that of Karnataka
+Add a record to the 'product' table with following data
+pro_id: 7, pro_name: snacks, MRP: 90.00 MFG_DATE: 2022-01-01 category_id: should be same as of category_id of Food Items
+Add a record to the 'st' table with following data
+rollNo: 11, name: PQR, email: pqr@gmail.com, state: Himachal Pradesh, x_per: maximum x_per of all students
+Write a query to find record of all scholars whose x_per is more than average x_per of all scholars
+Write a query to find record of all scholars whose x_per is not equal to the x_per from the scholars of Karnataka
+Write a query to find record of all scholars whose x_per is less than the x_per of any scholar of Karnataka
+Write a query to find record of all scholars whose x_per is more than the x_per of any scholar of Karnataka
+Write a query to find record of all scholars whose x_per is more than the x_per of all scholar of Karnataka
+Write a query to find record of all scholars whose x_per is less than the x_per of all scholar of Karnataka
+
+
+Transaction Management
+Let say we have a table named as account that have following structure
+tid int(10) PRIMARY KEY
+name VARCHAR(20) NOT NULL
+amount int NOT NULL
+email VARCHAR(50) NOT NULL
+
+& make following entries
+1, Dinesh, 4000, dinesh@ms.com
+2, Jayesh, 4000, jayesh@ms.com
+
+Say we want to transfer INR 1000 from dinesh’s account to jayesh’s account. Make sure that transaction should be atomic. Write query for this.
+Say we want to transfer INR 500 from dinesh’s account to jayesh’s account. Use rollback to cancel transaction. Write query for this.
+Say we want to transfer INR 500 from dinesh’s account to jayesh’s account then INR 1000 again. Use rollback to cancel the transaction of 1000/- but transaction of 500/- should ve commited. Write query for this.
+Write query to demonstrate effect of off autocommit.
+Write query to demonstrate effect of on autocommit.
+
+
+Write query to show indexes of table st
+Write query to find number of records scanned by database to search scholar with AED
+Write query to create index on 'name' of table st;
+Repeat "Write query to find number of records scanned by database to search scholar with AED"
+Repeat "Write query to show indexes of table st"
