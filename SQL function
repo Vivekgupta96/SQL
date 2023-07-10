@@ -38,3 +38,160 @@ Sure! Here are some commonly used SQL functions:
    - NULLIF(): Compares two expressions and returns null if they are equal.
 
 These are just a few examples of SQL functions. Different database systems may have additional or specialized functions available.
+
+
+Certainly! Here are some examples of SQL functions:
+
+1. Aggregate Functions:
+
+- COUNT():
+  ```sql
+  SELECT COUNT(*) FROM Customers;
+  ```
+
+- SUM():
+  ```sql
+  SELECT SUM(Quantity) FROM Orders;
+  ```
+
+- AVG():
+  ```sql
+  SELECT AVG(Price) FROM Products;
+  ```
+
+- MIN():
+  ```sql
+  SELECT MIN(Age) FROM Employees;
+  ```
+
+- MAX():
+  ```sql
+  SELECT MAX(Salary) FROM Employees;
+  ```
+
+2. String Functions:
+
+- CONCAT():
+  ```sql
+  SELECT CONCAT(FirstName, ' ', LastName) AS FullName FROM Customers;
+  ```
+
+- LENGTH():
+  ```sql
+  SELECT LENGTH(Description) FROM Products;
+  ```
+
+- UPPER():
+  ```sql
+  SELECT UPPER(FirstName) FROM Customers;
+  ```
+
+- LOWER():
+  ```sql
+  SELECT LOWER(LastName) FROM Customers;
+  ```
+
+- SUBSTRING():
+  ```sql
+  SELECT SUBSTRING(Title, 1, 5) FROM Books;
+  ```
+
+- REPLACE():
+  ```sql
+  SELECT REPLACE(Description, 'old', 'new') FROM Products;
+  ```
+
+3. Date and Time Functions:
+
+- NOW():
+  ```sql
+  SELECT NOW() AS CurrentDateTime;
+  ```
+
+- CURDATE():
+  ```sql
+  SELECT CURDATE() AS CurrentDate;
+  ```
+
+- CURTIME():
+  ```sql
+  SELECT CURTIME() AS CurrentTime;
+  ```
+
+- DATE():
+  ```sql
+  SELECT DATE(Birthdate) FROM Employees;
+  ```
+
+- EXTRACT():
+  ```sql
+  SELECT EXTRACT(YEAR FROM OrderDate) FROM Orders;
+  ```
+
+- TIMESTAMPDIFF():
+  ```sql
+  SELECT TIMESTAMPDIFF(MONTH, OrderDate, NOW()) FROM Orders;
+  ```
+
+- DATE_FORMAT():
+  ```sql
+  SELECT DATE_FORMAT(OrderDate, '%Y-%m-%d') FROM Orders;
+  ```
+
+4. Mathematical Functions:
+
+- ABS():
+  ```sql
+  SELECT ABS(-10) FROM Numbers;
+  ```
+
+- ROUND():
+  ```sql
+  SELECT ROUND(Price, 2) FROM Products;
+  ```
+
+- CEILING():
+  ```sql
+  SELECT CEILING(2.4) FROM Numbers;
+  ```
+
+- FLOOR():
+  ```sql
+  SELECT FLOOR(3.9) FROM Numbers;
+  ```
+
+- SQRT():
+  ```sql
+  SELECT SQRT(25) FROM Numbers;
+  ```
+
+- POWER():
+  ```sql
+  SELECT POWER(2, 3) FROM Numbers;
+  ```
+
+5. Conditional Functions:
+
+- CASE WHEN:
+  ```sql
+  SELECT
+    OrderID,
+    CASE
+      WHEN Quantity > 10 THEN 'High'
+      WHEN Quantity > 5 THEN 'Medium'
+      ELSE 'Low'
+    END AS Priority
+  FROM Orders;
+  ```
+
+- COALESCE():
+  ```sql
+  SELECT COALESCE(FirstName, 'N/A') FROM Customers;
+  ```
+
+- NULLIF():
+  ```sql
+  SELECT NULLIF(Quantity, 0) FROM Products;
+  ```
+
+These examples illustrate how the SQL functions can be used in various scenarios. Please note that the specific syntax and usage of functions may vary depending on the database system you are using.
