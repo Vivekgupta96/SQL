@@ -1,0 +1,40 @@
+Sure! Here are some commonly used SQL functions:
+
+1. Aggregate Functions:
+   - COUNT(): Counts the number of rows or non-null values in a column.
+   - SUM(): Calculates the sum of values in a column.
+   - AVG(): Calculates the average of values in a column.
+   - MIN(): Returns the minimum value in a column.
+   - MAX(): Returns the maximum value in a column.
+
+2. String Functions:
+   - CONCAT(): Concatenates two or more strings together.
+   - LENGTH(): Returns the length of a string.
+   - UPPER(): Converts a string to uppercase.
+   - LOWER(): Converts a string to lowercase.
+   - SUBSTRING(): Extracts a substring from a string based on a starting position and length.
+   - REPLACE(): Replaces occurrences of a substring within a string.
+
+3. Date and Time Functions:
+   - NOW(): Returns the current date and time.
+   - CURDATE(): Returns the current date.
+   - CURTIME(): Returns the current time.
+   - DATE(): Extracts the date part from a date/time value.
+   - EXTRACT(): Extracts a specific part (year, month, day, hour, etc.) from a date/time value.
+   - TIMESTAMPDIFF(): Calculates the difference between two date/time values in a specified unit (year, month, day, hour, etc.).
+   - DATE_FORMAT(): Formats a date/time value based on a specified format.
+
+4. Mathematical Functions:
+   - ABS(): Returns the absolute value of a number.
+   - ROUND(): Rounds a number to a specified number of decimal places.
+   - CEILING(): Rounds a number up to the nearest integer.
+   - FLOOR(): Rounds a number down to the nearest integer.
+   - SQRT(): Calculates the square root of a number.
+   - POWER(): Raises a number to a specified power.
+
+5. Conditional Functions:
+   - CASE WHEN: Performs conditional branching within a query.
+   - COALESCE(): Returns the first non-null value in a list of expressions.
+   - NULLIF(): Compares two expressions and returns null if they are equal.
+
+These are just a few examples of SQL functions. Different database systems may have additional or specialized functions available.
