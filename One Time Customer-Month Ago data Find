@@ -1,0 +1,22 @@
+Write a query to identify customer IDs who have ordered only once and find out how many months back the order was placed.
+
+Use timestampdiff to find last ordered months ago
+
+Print customer ID along with the number of months count.
+
+Order your output in ascending order of Customer ID.
+
+
+
+SELECT
+  Orders.CustomerID AS CustomerID,
+  TIMESTAMPDIFF(MONTH, MAX(Orders.OrderDate), NOW()) AS MonthsAgo
+FROM
+  Orders
+GROUP BY
+  Orders.CustomerID
+HAVING
+  COUNT(Orders.OrderID) = 1
+ORDER BY
+  CustomerID ASC;
+
