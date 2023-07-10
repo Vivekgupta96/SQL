@@ -1,0 +1,29 @@
+# Product Count
+
+Categorize all the different products on the basis of their market price.
+
+Classify all products whose price is less than 2000 as 'Affordable'
+
+Products whose price lies between 2000 and 8000 as 'Mid Range'
+
+Products with a price greater than 8000 as 'Costly'
+
+Print the category name and the count of products falling into the respective categories.
+
+Sort the result in descending order of Product Count
+
+
+
+SELECT
+    CASE
+        WHEN market_price < 2000 THEN 'Affordable'
+        WHEN market_price >= 2000 AND market_price <= 8000 THEN 'Mid Range'
+        WHEN market_price > 8000 THEN 'Costly'
+    END AS Category,
+    COUNT(*) AS ProductCount
+FROM
+    Products
+GROUP BY
+    Category
+ORDER BY
+    ProductCount DESC;
